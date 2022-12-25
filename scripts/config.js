@@ -1,6 +1,5 @@
 function openPlayerConfig (event) {
-    const selectedPlayerId = event.target.dataset.playerid
-    editedPlayer = selectedPlayerId
+    editedPlayer = Number(event.target.dataset.playerid)
     playerConfigOverlayElement.style.display = "block"
     backdropElement.style.display = "block"
 }
@@ -10,6 +9,7 @@ function closePlayerConfig() {
     backdropElement.style.display = "none"
     formElement.firstElementChild.classList.remove("error")
     errorsOutputElement.textContent = ""
+    formElement.firstElementChild.lastElementChild.value = ""
 }
 
 // Handel form submission inside of browser instead of sending https request to server
@@ -23,6 +23,11 @@ function savePlayerConfig(event) {
         errorsOutputElement.textContent = "Please enter a valid name!"
         return
     }
-    // for (const entry of formData.entries())
-    // console.log(entry)
+
+    const updatedPlayerDataElement = document.getElementById("player-" + editedPlayer + "-data")
+    updatedPlayerDataElement.children[1].textContent = enteredPlayerName
+
+    players[editedPlayer - 1].name = enteredPlayerName
+
+    closePlayerConfig()
 }
