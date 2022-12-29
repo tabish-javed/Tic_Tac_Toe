@@ -22,9 +22,7 @@ function startNewGame() {
         alert("Please set custom player names for both players!")
         return
     }
-
     resetGameStatus()
-
     activePlayerNameElement.textContent = players[activePlayer].name
     gameAreaElement.style.display = "block"
 }
@@ -57,11 +55,9 @@ function selectGameField(event) {
     gameData[selectedRow][selectedColumn] = activePlayer + 1
 
     const winnerId = checkForGameOver()
-
     if (winnerId !== 0) {
         endGame(winnerId)
     }
-
     currentRound++
     switchPlayer()
 }
@@ -108,7 +104,6 @@ function checkForGameOver() {
 function endGame(winnerId) {
     gameIsOver = true
     gameOverElement.style.display = "block"
-
     if (winnerId > 0) {
         const winnerName = players[winnerId - 1].name
         gameOverElement.firstElementChild.firstElementChild.textContent = winnerName
